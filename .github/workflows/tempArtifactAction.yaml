@@ -1,18 +1,17 @@
-name: Create Text Artifact
+name: Create and Upload Artifact
 
 on:
   push:
     branches:
       - main
 
-      
 jobs:
-  create_artifact:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
       - name: Create Text File
         run: echo "This is a sample text artifact." > my_artifact.txt
@@ -22,3 +21,11 @@ jobs:
         with:
           name: my-artifact
           path: my_artifact.txt
+
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: my_artifact.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
