@@ -1,17 +1,23 @@
+name: Create Text Artifact
 
-name: tempArchive
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
-  tempArchive:
-    runs-on: macOS
-    steps:
-    - name: Create Artifact
-      run: echo "some version" > fix-version-artifact.txt
+  create_artifact:
+    runs-on: ubuntu-latest
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: fix-version-artifact
-        path: fix-version-artifact.txt
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Text File
+        run: echo "This is a sample text artifact." > my_artifact.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: my_artifact.txt

@@ -1,29 +1,20 @@
-name: Verified Transition
+name: Print Text Artifact
 
 on:
   workflow_run:
-    workflows: ["tempArchive"]
+    workflows: ["Create Text Artifact"]
     types:
       - completed
 
 jobs:
-  verified_transition:
-    runs-on: macOS
+  print_artifact:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Check User
-        run: |
-          allowed_users=("pmuraus" "mihahoz")
-
-          # Check if the triggerer's username is in the allowed_users list
-          if [[ ! " ${allowed_users[@]} " =~ " ${GITHUB_ACTOR} " ]]; then
-            echo "This workflow can only be triggered by approved users."
-            exit 1
-          fi
-
-      - name: Get archived release fix version
+      - name: Download Artifact
         uses: actions/download-artifact@v2
         with:
-          name: fix-version-artifact
+          name: my-artifact
 
-      - name: Read archived release fix version
-        run: cat fix-version-artifact.txt
+      - name: Print Artifact Content
+        run: cat my_artifact/my_artifact.txt
