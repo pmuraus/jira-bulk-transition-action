@@ -6,6 +6,10 @@ on:
       - main
 
 jobs:
+  check_runner:
+    runs-on: macOS
+    env:
+      RUNNER_NAME: "macOS"
   build:
     runs-on: ubuntu-latest
 
@@ -22,6 +26,8 @@ jobs:
           name: my-artifact
           path: my_artifact.txt
 
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
