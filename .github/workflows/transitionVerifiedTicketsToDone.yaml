@@ -1,7 +1,10 @@
 name: Verified Transition
 
 on:
-  workflow_dispatch:
+  workflow_run:
+    workflows: ["tempArchive"]
+    types:
+      - completed
 
 jobs:
   verified_transition:
