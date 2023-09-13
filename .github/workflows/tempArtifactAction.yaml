@@ -5,16 +5,20 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   check_runner:
     runs-on: macOS
+    timeout-minutes: 1
     steps: 
       - name: runner test
         run: echo "I am alive"
 
   build:
     runs-on: ${{ github.event.workflow_run.workflow_job.conclusion == 'failure' && 'ubuntu-latest' || 'macOS' }}
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
