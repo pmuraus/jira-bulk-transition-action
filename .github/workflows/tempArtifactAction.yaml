@@ -8,10 +8,12 @@ on:
 jobs:
   check_runner:
     runs-on: macOS
-    env:
-      RUNNER_NAME: "macOS"
+    steps: 
+      - name: runner test
+        run: echo "I am alive"
+
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ github.event.workflow_run.workflow_job.conclusion == 'failure' && 'ubuntu-latest' || 'macOS' }}
 
     steps:
       - name: Checkout code
