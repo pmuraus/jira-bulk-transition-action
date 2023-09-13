@@ -1,10 +1,7 @@
 name: Verified Transition
 
 on:
-  workflow_run:
-    workflows: ["Verified to Done Transition Workflow"]
-    types:
-      - requested
+  workflow_dispatch:
 
 jobs:
   verified_transition:
