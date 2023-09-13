@@ -1,0 +1,29 @@
+name: Verified Transition
+
+on:
+  workflow_run:
+    workflows: ["Verified to Done Transition Workflow"]
+    types:
+      - requested
+
+jobs:
+  verified_transition:
+    runs-on: macOS
+    steps:
+      - name: Check User
+        run: |
+          allowed_users=("pmuraus" "mihahoz")
+
+          # Check if the triggerer's username is in the allowed_users list
+          if [[ ! " ${allowed_users[@]} " =~ " ${GITHUB_ACTOR} " ]]; then
+            echo "This workflow can only be triggered by user1 or user2."
+            exit 1
+          fi
+
+      - name: Get archived release fix version
+        uses: actions/download-artifact@v2
+        with:
+          name: fix-version-artifact
+
+      - name: Read archived release fix version
+        run: cat fix-version-artifact.txt

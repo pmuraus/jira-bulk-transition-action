@@ -1,0 +1,17 @@
+
+name: tempArchive
+on:
+  workflow_run:
+
+jobs:
+  tempArchive:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create Artifact
+      run: echo "some version" > fix-version-artifact.txt
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: fix-version-artifact
+        path: fix-version-artifact.txt
