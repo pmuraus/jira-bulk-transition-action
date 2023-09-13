@@ -18,3 +18,11 @@ jobs:
 
       - name: Print Artifact Content
         run: cat my_artifact/my_artifact.txt
+      
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: my_artifact.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
