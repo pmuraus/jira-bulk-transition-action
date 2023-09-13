@@ -34,7 +34,6 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: my_artifact.txt
           tag_name: v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
