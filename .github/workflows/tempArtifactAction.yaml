@@ -2,7 +2,10 @@
 name: tempArchive
 on:
   workflow_run:
-
+    workflows: ["Verified to Done Transition Workflow"]
+    types:
+      - requested
+      
 jobs:
   tempArchive:
     runs-on: ubuntu-latest
