@@ -13,7 +13,7 @@ jobs:
 
           # Check if the triggerer's username is in the allowed_users list
           if [[ ! " ${allowed_users[@]} " =~ " ${GITHUB_ACTOR} " ]]; then
-            echo "This workflow can only be triggered by user1 or user2."
+            echo "This workflow can only be triggered by approved users."
             exit 1
           fi
 
